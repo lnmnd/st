@@ -453,7 +453,7 @@ selextend(int col, int row, int type, int done)
 {
 	int oldey, oldex, oldsby, oldsey, oldtype;
 
-	if (!sel.mode)
+	if (sel.mode == SEL_IDLE)
 		return;
 	if (done && sel.mode == SEL_EMPTY) {
 		selclear();
@@ -732,7 +732,6 @@ sigchld(int a)
 	exit(0);
 }
 
-
 void
 stty(char **args)
 {
@@ -754,7 +753,7 @@ stty(char **args)
 	}
 	*q = '\0';
 	if (system(cmd) != 0)
-	    perror("Couldn't call stty");
+		perror("Couldn't call stty");
 }
 
 int
